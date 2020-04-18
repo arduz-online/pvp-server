@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outFile": "./dist/server.js",
+    "noUnusedLocals": true,
+    "preserveConstEnums": true,
+    "alwaysStrict": true,
+    "paths": {
+      "@arduz/*": [
+        "./node_modules/arduz-sdk/modules/@arduz/*"
+      ],
+      "sdk/*": [
+        "./node_modules/arduz-sdk/dist/arduz-sdk.d.ts"
+      ]
+    },
+    "baseUrl": ".",
+  },
+  "extends": "./node_modules/ulla-ecs/types/tsconfig.json",
+  "exclude": [
+    "dist"
+  ]
+}

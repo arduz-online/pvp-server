@@ -1,0 +1,27 @@
+{
+  "name": "arduz-pvp-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "typings": "dist/server.d.ts",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arduz-io/pvp-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/arduz-io/pvp-server/issues"
+  },
+  "homepage": "https://github.com/arduz-io/pvp-server#readme",
+  "dependencies": {
+    "arduz-sdk": "^1.0.0-20200418194556.commit-f691b32"
+  },
+  "ulla": {
+    "libs": [
+      "./node_modules/arduz-sdk/dist/arduz-sdk.js"
+    ]
+  }
+}
