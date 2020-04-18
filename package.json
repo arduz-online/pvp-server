@@ -17,12 +17,14 @@
   },
   "homepage": "https://github.com/arduz-io/pvp-server#readme",
   "dependencies": {
-    "arduz-sdk": "^1.0.0-20200418194556.commit-f691b32"
+    "arduz-sdk": "^1.0.0-20200418204234.commit-534d0f1"
   },
   "ulla": {
     "libs": [
       "./node_modules/arduz-sdk/dist/arduz-sdk.js"
     ]
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }
