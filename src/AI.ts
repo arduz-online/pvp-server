@@ -1,7 +1,6 @@
 import { BaseAI } from "./AI/Base";
 
 export class AISystem {
-  
   currentTime = 0;
   bots!: ComponentGroup;
 

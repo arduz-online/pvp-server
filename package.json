@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/arduz-io/pvp-server#readme",
   "dependencies": {
-    "arduz-sdk": "^1.0.0-20200418204234.commit-534d0f1"
+    "arduz-sdk": "^1.0.0-20200418231428.commit-9f80249",
+    "ulla-builder": "^1.0.0-20200418231948.commit-92a838f"
   },
   "ulla": {
     "libs": [

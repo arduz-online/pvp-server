@@ -5,5 +5,6 @@ import { startBaseSystems, startServer } from "sdk";
 startServer(async () => {
   await startBaseSystems()
   await startTeamsMode()
+  log('hia')
 });
 

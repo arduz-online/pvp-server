@@ -14,7 +14,7 @@
     },
     "baseUrl": ".",
   },
-  "extends": "./node_modules/ulla-ecs/types/tsconfig.json",
+  "extends": "./node_modules/arduz-sdk/types/tsconfig.json",
   "exclude": [
     "dist"
   ]

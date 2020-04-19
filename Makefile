@@ -20,7 +20,7 @@ watch_sources:
 	$(BUILDER) --watch
 
 update_ulla:
-	npm i -S ulla-compiler@next ulla-ecs@next
+	npm i -S ulla-builder@next
 
 # links dependencies, builds itself and expose linked module
 link:
