@@ -2,16 +2,23 @@ import { CharacterDescription } from "sdk/Declares";
 import { Character } from "sdk/Components/Character";
 import { getRandomInteger, distance } from "sdk/AtomicHelpers/Numbers";
 import { items, skills } from "sdk/Balance";
-import { getNakedBody, getHead } from "sdk/Components/Body";
 import { isInvisible } from "sdk/Components/Invisible";
 import { AiStrategy, TargetEntity } from "./Base";
-import { entitiesWithBodyAndPosition, WorldPosition } from "sdk/Components/WorldPosition";
+import {
+  entitiesWithBodyAndPosition,
+  WorldPosition,
+} from "sdk/Components/WorldPosition";
 import { charUsesItem } from "sdk/Events/CharEvents";
 import { isParalyzed } from "sdk/Components/Paralysis";
-import { handleUseSkill, handleMapClick, handleWalk } from "sdk/Functions/networkHandlers";
+import {
+  handleUseSkill,
+  handleMapClick,
+  handleWalk,
+} from "sdk/Functions/networkHandlers";
 import { Walking } from "sdk/Components/Walking";
 import { Alignment } from "../Alignments";
 import { SkillSlots, Race, Gender, CharClass, InventorySlots } from "sdk/Enums";
+import { getNakedBody, getHead } from "sdk/AtomicHelpers/BodyHelpers";
 
 const REMOVE_PARALYSIS_SLOT = SkillSlots.Spell3;
 const DESC_SLOT = SkillSlots.Spell7;
@@ -95,11 +102,11 @@ export class MageAi extends AiStrategy {
 
   statsTick(char: IEntity) {
     if (char instanceof Character) {
-      if (!char.timers.canUseItem()) {
+      const chancesOfDrinkingPosion = isParalyzed(char) ? 0 : 3;
+
+      if (!char.timers.canUseItem(false)) {
         return;
       }
-
-      const chancesOfDrinkingPosion = isParalyzed(char) ? 2 : 5;
 
       if (this.rollDice(chancesOfDrinkingPosion)) {
         if (char.stats.minHp < char.stats.maxHp) {
@@ -136,7 +143,12 @@ export class MageAi extends AiStrategy {
 
         const position = char.getComponent(WorldPosition);
 
-        const dist = distance(entityPosition.x, entityPosition.y, position.x, position.y);
+        const dist = distance(
+          entityPosition.x,
+          entityPosition.y,
+          position.x,
+          position.y
+        );
 
         // pick closest character
         if (!bestTarget || bestTargetDistance > dist) {
@@ -174,7 +186,10 @@ export class MageAi extends AiStrategy {
     let target = me.getComponentOrNull(TargetEntity);
 
     if (target && target.entity) {
-      if (isInvisible(target.entity) || (target.entity instanceof Character && target.entity.body.dead)) {
+      if (
+        isInvisible(target.entity) ||
+        (target.entity instanceof Character && target.entity.body.dead)
+      ) {
         target.entity = null;
       }
     }
@@ -185,11 +200,12 @@ export class MageAi extends AiStrategy {
 
     target = me.getComponentOrNull(TargetEntity);
 
-    const targetChar = target && target.entity instanceof Character && target.entity;
+    const targetChar =
+      target && target.entity instanceof Character && target.entity;
 
     if (isParalyzed(me)) {
       // cast remove paralysis spell
-      if (timers.canSpell()) {
+      if (timers.canSpell(false)) {
         if (this.rollDice(6)) {
           handleUseSkill(me, REMOVE_PARALYSIS_SLOT);
           handleMapClick(me, me.position.x, me.position.y);
@@ -200,21 +216,25 @@ export class MageAi extends AiStrategy {
     } else if (targetChar && !targetChar.body.dead) {
       const attackDistance = 100;
 
-      if (timers.canSpell()) {
+      if (timers.canSpell(false)) {
         const isTargetParalyzed = isParalyzed(targetChar);
         const baseRandom = 2;
-        const dist = distance(me.position.x, me.position.y, targetChar.position.x, targetChar.position.y);
-        const distDiv = dist / attackDistance;
-        const multiplier = isTargetParalyzed ? 0 : (3 * distDiv) | 0;
+        const dist = distance(
+          me.position.x,
+          me.position.y,
+          targetChar.position.x,
+          targetChar.position.y
+        );
+        const distanceDifficulty = 4 * (dist / attackDistance);
+        const multiplier = isTargetParalyzed ? 0 : (2 + distanceDifficulty) | 0;
 
         if (dist > attackDistance) {
           // do nothing, we are far away
         } else if (!this.rollDice(multiplier)) {
           // do nothing, we missed
-          timers.didSpell();
+          timers.canSpell(true);
         } else {
           this.attack(me, targetChar, baseRandom * multiplier + 2);
-          timers.didSpell();
         }
       }
     }
@@ -223,7 +243,7 @@ export class MageAi extends AiStrategy {
       if (targetChar) {
         me.getComponentOrCreate(Walking).target = targetChar.position;
       } else {
-        if (this.rollDice(5)) {
+        if (this.rollDice(3)) {
           handleWalk(me, getRandomInteger(0, 3));
         }
       }

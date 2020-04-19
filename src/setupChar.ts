@@ -1,9 +1,10 @@
+import type { BasicAlignment } from "@arduz/Connections";
+
 import { Character } from "sdk/Components/Character";
 import { skills, items } from "sdk/Balance";
 import { Archetypes } from "sdk/Components/Archetype";
-import { getHead } from "sdk/Components/Body";
-import type { BasicAlignment } from "@arduz/Connections";
 import { SkillSlots, CharClass, Race, Gender, InventorySlots } from "sdk/Enums";
+import { getHead } from "sdk/AtomicHelpers/BodyHelpers";
 
 export function setArchetypes(char: Character, alignments: BasicAlignment[]) {
   const arch = char.getComponentOrCreate(Archetypes);

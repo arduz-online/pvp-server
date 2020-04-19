@@ -1,5 +1,6 @@
-import { Character } from "sdk/Components/Character";
 import type { BasicAlignment } from "@arduz/Connections";
+
+import { Character } from "sdk/Components/Character";
 import { MapData } from "sdk/Components/MapData";
 import { WorldPosition } from "sdk/Components/WorldPosition";
 import { BaseAI } from "./AI/Base";

@@ -10,6 +10,7 @@ install_ubuntu: install
 
 install:
 	npm install
+	npm i -S arduz-sdk@next
 
 build: export NODE_ENV=production
 build:
@@ -24,9 +25,9 @@ update_ulla:
 
 # links dependencies, builds itself and expose linked module
 link:
+	npm link
 	npm link arduz-sdk
 	$(MAKE) build
-	npm link
 
 watch: watch_sources
 

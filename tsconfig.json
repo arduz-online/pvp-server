@@ -3,6 +3,9 @@
     "outFile": "./dist/server.js",
     "noUnusedLocals": true,
     "preserveConstEnums": true,
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
     "alwaysStrict": true,
     "paths": {
       "@arduz/*": [

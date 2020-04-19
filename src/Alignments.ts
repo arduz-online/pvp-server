@@ -1,4 +1,4 @@
-import { BasicAlignment } from "@arduz/Connections";
+import type { BasicAlignment } from "@arduz/Connections";
 
 @Component("alignment")
 export class Alignment implements BasicAlignment {
