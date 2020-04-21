@@ -1,6 +1,10 @@
 import { onNewCharacterObservable, Character } from "sdk/Components/Character";
 import { setArchetypes } from "./setupChar";
-import { sendMessageObservable, onMessageObservable } from "sdk/Components/Connection";
+import {
+  sendMessageObservable,
+  onMessageObservable,
+  onDisconnection,
+} from "sdk/Components/Connection";
 import { loadCharacterFromArchetype } from "sdk/Functions/Helpers";
 import { TeamRoundsSystem } from "./Rounds";
 import { AISystem } from "./AI";
@@ -20,6 +24,10 @@ export async function startTeamsMode() {
         SelectCharacter: {},
       },
     });
+  });
+
+  onDisconnection.add(({ entity }) => {
+    engine.removeEntity(entity);
   });
 
   onMessageObservable.add(({ entity, data }) => {
