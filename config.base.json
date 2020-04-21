@@ -1,0 +1,12 @@
+{
+  "privateKey": "taken from https://arduz.io/#/app/host-local",
+  "manifest": {
+    "serverName": "PvP CLI Test",
+    "configuration": {
+      "code": "./dist/server.js",
+      "baseUrl": "https://cdn.arduz.io",
+      "fps": 30,
+      "map": "bafybeiab46dbzwuyxttnwy67m62bmsnkc2spn3kum3xrngueb5y6lwy7um"
+    }
+  }
+}

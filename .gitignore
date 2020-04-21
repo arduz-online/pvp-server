@@ -3,3 +3,4 @@ dist/**/*.js
 dist/**/*.d.ts
 public/bin
 **/.DS_Store
+config.json
