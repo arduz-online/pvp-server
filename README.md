@@ -5,7 +5,7 @@
 1.  Create a copy of the file `config.base.json` named `config.json`
 2.  Login and go to https://arduz.io/#/app/host-local
 3.  Copy the `privateKey` value into the `config.json`
-4.  Run `npm install && npm start`
+4.  Run `npm install && npm start` or using the Visual Studio Code debugger
 
 You can now play your local server in https://arduz.io
 

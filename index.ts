@@ -1,6 +1,6 @@
 
 import { startTeamsMode } from "src/Arduz";
-import { startBaseSystems, startServer } from "sdk";
+import { startBaseSystems, startServer } from "arduz-sdk";
 
 startServer(async () => {
   await startBaseSystems()

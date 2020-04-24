@@ -12,6 +12,7 @@ install:
 	npm install
 	npm i -S arduz-sdk@next
 	npm i -D arduz-host@next
+	npm i -D ulla-builder@next
 
 build: export NODE_ENV=production
 build:
@@ -24,6 +25,9 @@ watch:
 update_ulla:
 	npm i -S ulla-builder@next
 	npm i -S arduz-sdk@next
+
+link-builder:
+	ln -svfh ../../../ulla/packages/ulla-builder/index.js node_modules/.bin/ulla-builder
 
 # links dependencies, builds itself and expose linked module
 link:
